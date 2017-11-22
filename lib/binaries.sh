@@ -90,3 +90,21 @@ install_npm() {
     echo "npm `npm --version` installed"
   fi
 }
+
+install_lerna() {
+  local version="$1"
+  local dir="$2"
+
+  if [ "$version" == "" ]; then
+    echo "Installing latest lerna version"
+    if ! npm install --unsafe-perm --quiet -g "lerna@$version" 2>@1>/dev/null; then
+      echo "Unable to install lerna $version; does it exist?" && false
+    fi
+  else
+    echo "Installing lerna $version..."
+    if ! npm install --unsafe-perm --quiet -g "lerna@$version" 2>@1>/dev/null; then
+      echo "Unable to install lerna $version; does it exist?" && false
+    fi
+  fi
+  echo "lerna `lerna --version` installed"
+}

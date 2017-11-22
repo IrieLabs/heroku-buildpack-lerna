@@ -144,3 +144,15 @@ npm_rebuild() {
     echo "Skipping (no package.json)"
   fi
 }
+
+lerna_bootstrap() {
+  local build_dir=${1:-}
+
+  echo "Bootstrapping lerna packages"
+  cd "$build_dir"
+  if $LERNA_IGNORE; then
+    lerna bootstrap --ignore "$LERNA_IGNORE" 2>&1
+  else
+    lerna bootstrap 2>&1
+  fi
+}
