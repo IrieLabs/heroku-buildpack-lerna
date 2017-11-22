@@ -150,10 +150,10 @@ lerna_bootstrap() {
 
   echo "Bootstrapping lerna packages"
   cd "$build_dir"
-  if $LERNA_IGNORE; then
+  if [ "$LERNA_IGNORE" == "" ]; then
+    lerna bootstrap 2>&1
+  else
     echo "Lerna: ignoring $LERNA_IGNORE"
     lerna bootstrap --ignore "$LERNA_IGNORE" 2>&1
-  else
-    lerna bootstrap 2>&1
   fi
 }
